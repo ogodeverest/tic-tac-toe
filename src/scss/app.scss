@@ -1,0 +1,35 @@
+@import "./reset";
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+:root {
+  --clr-body: #192a32;
+  --clr-tile: #1f3540;
+  --clr-tile-darker: #142126;
+  --clr-cold: #31c4be;
+  --clr-warm: #f2b237;
+  --clr-neutral: #a8bec9;
+  --clr-neutral-darker: #6d8794;
+}
+
+body {
+  background-color: var(--clr-body);
+  text-transform: uppercase;
+  font-family: "Lato", sans-serif;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+::selection {
+  color: var(--clr-body);
+  background-color: var(--clr-neutral);
+}
+
+body,
+#app {
+  height: 100vh;
+}
+
+#app {
+  display: grid;
+  grid-template-columns: minmax(1em, 1fr) minmax(20em, 1.2fr) minmax(1em, 1fr);
+  align-items: center;
+}

@@ -1,45 +1,113 @@
 <script lang="ts">
-  import svelteLogo from './assets/svelte.svg'
-  import Counter from './lib/Counter.svelte'
+  import CircleIcon from "./components/CircleIcon.svelte";
+  import CrossIcon from "./components/CrossIcon.svelte";
+  import RestartIcon from "./components/RestartIcon.svelte";
 </script>
 
 <main>
-  <div>
-    <a href="https://vitejs.dev" target="_blank"> 
-      <img src="/vite.svg" class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank"> 
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
-  </div>
-  <h1>Vite + Svelte</h1>
+  <header class="header">
+    <div class="header__players">
+      <CrossIcon size="1.8em" color="var(--clr-cold)" />
+      <CircleIcon size="1.8em" color="var(--clr-warm)" />
+    </div>
 
-  <div class="card">
-    <Counter />
-  </div>
+    <p class="header__turn">
+      <CrossIcon size="1.1em" color="var(--clr-neutral)" />
+      <span>turn</span>
+    </p>
 
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
+    <button class="header__button">
+      <RestartIcon size="1em" color="var(--clr-body)" />
+    </button>
+  </header>
 
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
+  <section>
+    <button class="tile" />
+    <button class="tile" />
+    <button class="tile" />
+    <button class="tile" />
+    <button class="tile" />
+    <button class="tile" />
+    <button class="tile" />
+    <button class="tile" />
+    <button class="tile" />
+  </section>
+  <footer />
 </main>
 
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
+<style lang="scss">
+  @import "./scss/mixins";
+
+  @mixin main-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 1.5rem;
   }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
+
+  main {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    grid-column: 2/3;
   }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
+
+  .header {
+    @include main-grid;
+    height: 2.4em;
+
+    &__turn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      grid-column: 2/3;
+      padding-block: 0.5em;
+      border-radius: 9px;
+      background-color: var(--clr-tile);
+      color: var(--clr-neutral);
+      @include generate-shadow(var(--clr-tile-darker));
+      span {
+        font-size: 0.85rem;
+        margin-left: 0.6em;
+      }
+    }
+
+    &__button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      justify-self: end;
+      background-color: var(--clr-neutral);
+      @include generate-shadow(var(--clr-neutral-darker));
+      padding: 0.8em;
+      aspect-ratio: 1;
+      outline: 0;
+      border: none;
+      border-radius: 9px;
+      cursor: pointer;
+
+      &:active {
+        @include generate-shadow(var(--clr-neutral-darker), 2px);
+        transform: translateY(2px);
+      }
+    }
   }
-  .read-the-docs {
-    color: #888;
+
+  section {
+    @include main-grid;
+    .tile {
+      outline: 0;
+      border: none;
+      background-color: var(--clr-tile);
+      @include generate-shadow(var(--clr-tile-darker), 7px);
+      border-radius: 9px;
+      aspect-ratio: 1;
+
+      cursor: pointer;
+      &:active {
+        @include generate-shadow(var(--clr-tile-darker), 4px);
+        transform: translateY(5px);
+      }
+    }
   }
 </style>
