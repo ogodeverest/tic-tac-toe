@@ -1,3 +1,33 @@
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 @mixin generate-shadow($color, $vertical-shadow: 4px) {
   box-shadow: 0px $vertical-shadow 0px 0px $color;
+}
+
+@mixin main-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  gap: 1.5rem;
+}
+
+@mixin tile($color) {
+  @include flex-center;
+  background-color: $color;
+  border-radius: 9px;
+}
+
+@mixin key-button($shadow-color, $vertical-shadow: 4px) {
+  outline: 0;
+  border: none;
+  cursor: pointer;
+  aspect-ratio: 1;
+  @include generate-shadow($shadow-color, $vertical-shadow);
+  &:active {
+    @include generate-shadow($shadow-color, calc($vertical-shadow / 2));
+    transform: translateY($vertical-shadow);
+  }
 }
