@@ -25,11 +25,11 @@ body {
 
 body,
 #app {
-  height: 120vh;
+  height: 100vh;
 }
 
 #app {
   display: grid;
-  grid-template-columns: minmax(1em, 1fr) minmax(20em, 1.2fr) minmax(1em, 1fr);
+  grid-template-columns: minmax(1em, 1fr) minmax(20em, 1fr) minmax(1em, 1fr);
   align-items: center;
 }

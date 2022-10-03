@@ -17,7 +17,7 @@
 @mixin tile($color) {
   @include flex-center;
   background-color: $color;
-  border-radius: 9px;
+  border-radius: 10px;
 }
 
 @mixin key-button($shadow-color, $vertical-shadow: 4px) {

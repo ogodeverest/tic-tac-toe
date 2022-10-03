@@ -1,7 +1,10 @@
 <script lang="ts">
+  import CircleIcon from "./CircleIcon.svelte";
 </script>
 
-<button class="tile" />
+<button class="tile">
+  <slot />
+</button>
 
 <style lang="scss">
   @import "../scss/mixins";
