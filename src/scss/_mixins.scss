@@ -14,7 +14,7 @@
   gap: 1.5rem;
 }
 
-@mixin tile($color) {
+@mixin box($color) {
   @include flex-center;
   background-color: $color;
   border-radius: 10px;
@@ -24,7 +24,6 @@
   outline: 0;
   border: none;
   cursor: pointer;
-  aspect-ratio: 1;
   @include generate-shadow($shadow-color, $vertical-shadow);
   &:active {
     @include generate-shadow($shadow-color, calc($vertical-shadow / 2));

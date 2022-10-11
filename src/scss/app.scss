@@ -1,11 +1,13 @@
 @import "./reset";
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap");
 :root {
   --clr-body: #192a32;
-  --clr-tile: #1f3540;
-  --clr-tile-darker: #142126;
+  --clr-primary: #1f3540;
+  --clr-primary-darker: #142126;
   --clr-cold: #31c4be;
+  --clr-cold-darker:#279b97;
   --clr-warm: #f2b237;
+  --clr-warm-darker:#d8910e;
   --clr-neutral: #a8bec9;
   --clr-neutral-darker: #6d8794;
 }
