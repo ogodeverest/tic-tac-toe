@@ -15,6 +15,6 @@
 <style lang="scss">
   ellipse {
     fill: none;
-    stroke-width: 120px;
+    stroke-width: 125px;
   }
 </style>
