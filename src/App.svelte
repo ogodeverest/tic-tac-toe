@@ -2,12 +2,18 @@
   import Stats from "./components/Stats.svelte";
   import Grid from "./components/Grid.svelte";
   import Header from "./components/Header.svelte";
+  import Intro from "./components/Intro.svelte";
+  import store from "./store";
 </script>
 
 <main>
-  <Header />
-  <Grid />
-  <Stats />
+  {#if $store}
+    <Header />
+    <Grid />
+    <Stats />
+  {:else}
+    <Intro />
+  {/if}
 </main>
 
 <style lang="scss">
