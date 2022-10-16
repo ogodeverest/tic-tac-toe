@@ -3,11 +3,13 @@
   import Grid from "./components/Grid.svelte";
   import Header from "./components/Header.svelte";
   import Intro from "./components/Intro.svelte";
+  import FinishModal from "./components/modals/FinishModal.svelte";
   import store from "./store";
 </script>
 
 <main>
   {#if $store}
+    <FinishModal />
     <Header />
     <Grid />
     <Stats />
