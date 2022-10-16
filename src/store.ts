@@ -4,20 +4,47 @@ import type Position from "./models/Position.inferface";
 import type { Players } from "./utils/Player";
 import CPU from "./utils/CPU";
 
+function saveGameState(gameState: GameState) {
+  localStorage.setItem("gameState", JSON.stringify(gameState));
+}
+
+function removeGameState() {
+  localStorage.removeItem("gameState");
+}
+
 function createStore() {
   const { subscribe, set, update } = writable(null);
 
   function create(players: Players) {
-    localStorage.removeItem("gameState");
-    set(new GameState(players));
+    const gameState: GameState = new GameState(players);
+    set(gameState);
+    saveGameState(gameState);
   }
+
   function mark(position: Position) {
-    update((state: GameState) => state.mark(position));
+    update((state: GameState) => {
+      const nextState: GameState = state.mark(position);
+      saveGameState(nextState);
+      return nextState;
+    });
   }
 
   function restart() {
-    localStorage.removeItem("gameState");
-    update((state: GameState) => state.restart());
+    update((state: GameState) => {
+      removeGameState();
+      const nextState: GameState = state.restart();
+      saveGameState(nextState);
+      return nextState;
+    });
+  }
+
+  function quit() {
+    set(null);
+    removeGameState();
+  }
+
+  function nextRound() {
+    update((state: GameState) => state.newRound());
   }
 
   subscribe((state: GameState) => {
@@ -31,6 +58,8 @@ function createStore() {
     mark,
     create,
     restart,
+    quit,
+    nextRound,
   };
 }
 
