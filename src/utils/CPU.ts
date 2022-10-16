@@ -1,8 +1,9 @@
 import type Position from "../models/Position.inferface";
 import type { Grid } from "./GameState";
-import Player, { type Mark } from "./Player";
+import Player from "./Player";
 
 export default class CPU extends Player {
+  cpu: boolean = true;
   move(grid: Grid): Promise<Position> {
     function choose(): Position {
       const { x, y }: Position = {
@@ -18,5 +19,18 @@ export default class CPU extends Player {
         resolve(choose());
       }, 1000);
     });
+  }
+
+  public toJSON(): string {
+    const { toJSON, move, ...rest } = this;
+    return JSON.stringify(rest);
+  }
+
+  static fromStorage(data: Partial<CPU>): CPU {
+    const { mark, ties, wins }: Partial<CPU> = data;
+    const player: CPU = new CPU(mark);
+    player.ties = ties;
+    player.wins = wins;
+    return player;
   }
 }

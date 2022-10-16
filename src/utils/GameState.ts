@@ -21,18 +21,18 @@ export default class GameState {
   constructor(players: Players, grid: Grid = emptyGrid) {
     this.grid = grid;
     this.players = players;
-    this.current = this.players.get("X");
+    this.winner = this.current = players.get("X");
     this.stalled = this.current instanceof CPU;
   }
 
-  public nextRound(): GameState {
+  public newRound(): GameState {
     return new GameState(this.players, emptyGrid);
   }
 
   public restart(): GameState {
     this.players.get("X").reset();
     this.players.get("O").reset();
-    return new GameState(this.players, emptyGrid);
+    return this.newRound();
   }
 
   private getNextPlayer() {
@@ -53,7 +53,6 @@ export default class GameState {
       if (y === position.y && x === position.x) return this.current;
       else return player;
     });
-
     const nextState = new GameState(this.players, newGrid);
     const noMoves = newGrid.every((row) => row.every((tile) => tile));
     nextState.winner = GameState.checkForWinner(newGrid, position);
@@ -63,9 +62,25 @@ export default class GameState {
     if (nextState.finished) {
       nextState.writeStats();
     }
-
-    nextState.save();
     return nextState;
+  }
+
+  public writeStats() {
+    if (this.winner) {
+      this.winner.wins++;
+    } else {
+      this.players.get("X").ties++;
+      this.players.get("O").ties++;
+    }
+  }
+
+  public toJSON(): string {
+    return JSON.stringify({
+      ...this,
+      grid: this.transform((row, player, y, x) => player && player.toJSON()),
+      players: [this.players.get("X").toJSON(), this.players.get("O").toJSON()],
+      current: this.current.toJSON(),
+    });
   }
 
   private static checkForWinner(grid: Grid, { x, y }: Position): Player | null {
@@ -98,34 +113,29 @@ export default class GameState {
     }
   }
 
-  public writeStats() {
-    if (this.winner) {
-      this.winner.wins++;
-    } else {
-      this.players.get("X").ties++;
-      this.players.get("O").ties++;
-    }
-  }
+  // public static fromJSON(data:string): null | GameState {
+  //   const saved = JSON.parse(data);
 
-  public save() {
-    localStorage.setItem("gameState", this.toJSON());
-  }
+  //   if (saved) {
+  //     const { grid, players } = saved;
 
-  // public static fromStorage(players:Players): GameState {
-  //     const  {grid,players} = JSON.parse(localStorage.getItem("gameState"));
-  //     const player = new GameState(players);
-  //     player.wins = wins;
-  //     player.ties = ties;
-  //     player.losess = losess;
-  //     return player;
+  //     console.log(grid);
+  //     const newGrid = grid.map((row: (Partial<Player> | null)[]) =>
+  //       row.map(
+  //         (player: Partial<Player> | null) =>
+  //           player && Player.fromObject(player)
+  //       )
+  //     );
+
+  //     const [playerX, playerO]: Array<Player> = players;
+
+  //     const newPlayers: Map<Mark, Player> = new Map();
+  //     newPlayers.set("X", playerX.cpu ? new CPU("X") : new Player("X"));
+  //     newPlayers.set("O", playerO.cpu ? new CPU("O") : new Player("O"));
+
+  //     console.log(new GameState(newPlayers, newGrid));
+  //     return new GameState(newPlayers, newGrid);
   //   }
-
-  public toJSON(): string {
-    return JSON.stringify({
-      ...this,
-      grid: this.transform((row, player, y, x) => player?.mark || player),
-      players: [this.players.get("X").toJSON(), this.players.get("O").toJSON()],
-      current: this.current.toJSON(),
-    });
-  }
+  //   return null;
+  // }
 }
