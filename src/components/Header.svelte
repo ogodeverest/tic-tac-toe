@@ -1,20 +1,27 @@
 <script lang="ts">
-  import TurnTile from "./Turn.svelte";
-  import PlayersMarks from "./PlayersMarks.svelte";
+  import { getContext } from "svelte";
+  import Turn from "./Turn.svelte";
+  import PlayersMarks from "./icons/PlayersMarks.svelte";
   import Button from "./Button.svelte";
   import RestartMark from "./icons/RestartMark.svelte";
-  import store from "../store";
+  import RestartConfirm from "./modals/RestartConfirm.svelte";
+  let show = false;
+
+  function handleToggleConfirm() {
+    show = !show;
+  }
 </script>
 
+<RestartConfirm {show} on:toggleConfirm={handleToggleConfirm} />
 <header class="header">
   <PlayersMarks />
-  <TurnTile />
+  <Turn />
   <Button
     theme="neutral"
     style="justify-self: end;
            padding: 0.8em;
-          aspect-ratio: 1;"
-    on:click={store.restart}
+           aspect-ratio: 1;"
+    on:click={handleToggleConfirm}
   >
     <RestartMark size="1em" color="var(--clr-body)" />
   </Button>
