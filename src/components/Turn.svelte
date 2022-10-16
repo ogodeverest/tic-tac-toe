@@ -2,16 +2,14 @@
   import store from "../store";
   import CircleMark from "./icons/CircleMark.svelte";
   import CrossMark from "./icons/CrossMark.svelte";
-
-  const MarkColor: string = "var(--clr-neutral)";
-  const MarkSize: string = "1.1em";
+  const markSize: string = "1.1em";
 </script>
 
 <div class="turn">
   {#if $store.current === $store.players.get("O")}
-    <CircleMark size={MarkSize} color={MarkColor} />
+    <CircleMark size={markSize} theme="neutral" />
   {:else}
-    <CrossMark size={MarkSize} color={MarkColor} />
+    <CrossMark size={markSize} theme="neutral" />
   {/if}
   <span>turn</span>
 </div>
