@@ -1,6 +1,6 @@
 <script lang="ts">
   import Button from "./Button.svelte";
-  import PlayersMarks from "./PlayersMarks.svelte";
+  import PlayersMarks from "./icons/PlayersMarks.svelte";
   import store from "../store";
   import type { Mark, Players } from "../utils/Player";
   import Player from "../utils/Player";
@@ -10,8 +10,8 @@
   const players: Players = new Map();
 
   function handleNewPVP() {
-    players.set("X", new Player("O"));
-    players.set("O", new Player("X"));
+    players.set("X", new Player("X"));
+    players.set("O", new Player("O"));
     store.create(players);
   }
 
@@ -54,9 +54,6 @@
       width: 100%;
       padding: 2em;
       @include box(var(--clr-primary));
-    }
-
-    :global(Button) {
     }
   }
 </style>
