@@ -6,6 +6,7 @@
   import type Position from "../models/Position.inferface";
 
   const markSize = "clamp(2.5rem,5vw,6rem)";
+
   function handleClick(position: Position) {
     store.mark(position);
   }
@@ -17,12 +18,13 @@
       <Button
         on:click={() => handleClick({ x, y })}
         disabled={!!tile || $store.stalled || $store.finished}
+        sound="grid"
         style="aspect-ratio:1;"
       >
         {#if tile === $store.players.get("O")}
-          <CircleMark size={markSize} color="var(--clr-warm)" />
+          <CircleMark size={markSize} theme="warm" />
         {:else if tile === $store.players.get("X")}
-          <CrossMark size={markSize} color="var(--clr-cold)" />
+          <CrossMark size={markSize} theme="cold" />
         {/if}
       </Button>
     {/each}
