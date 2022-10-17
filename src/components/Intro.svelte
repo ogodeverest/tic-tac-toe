@@ -5,8 +5,10 @@
   import type { Mark, Players } from "../utils/Player";
   import Player from "../utils/Player";
   import CPU from "../utils/CPU";
+  import MarkSelect from "./MarkSelect.svelte";
 
   let selectedMark: Mark = "X";
+
   const players: Players = new Map();
 
   function handleNewPVP() {
@@ -25,13 +27,11 @@
 
 <section class="intro">
   <PlayersMarks />
-  <div class="picker">
-    <label>
-      Pick players 1 mark
-      <input type="radio" name="mark" bind:group={selectedMark} value={"X"} />
-      <input type="radio" name="mark" bind:group={selectedMark} value={"O"} />
-    </label>
-    <p class="picker__hint">Remember X goes first</p>
+
+  <div class="intro__picker">
+    <h1 class="intro__heading">Pick player 1's mark</h1>
+    <MarkSelect bind:group={selectedMark} />
+    <p class="intro__hint">Remember X goes first</p>
   </div>
   <Button theme="warm" style="width: 100%;" on:click={handleNewPVC}
     >New game (vs CPU)</Button
@@ -50,10 +50,24 @@
     align-items: center;
     row-gap: 1.5em;
 
-    .picker {
+    &__picker {
       width: 100%;
-      padding: 2em;
+      padding: 1.5em;
       @include box(var(--clr-primary));
+      @include generate-shadow(var(--clr-primary-darker));
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__heading,
+    &__hint {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--clr-neutral);
+    }
+
+    &__hint {
+      opacity: 0.5;
     }
   }
 </style>
