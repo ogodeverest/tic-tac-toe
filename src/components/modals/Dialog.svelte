@@ -37,7 +37,7 @@
       height: 0;
     }
     to {
-      height: 45vh;
+      height: 43vh;
     }
   }
   .dialog {
@@ -52,6 +52,7 @@
     border: none;
     transform: translateY(-50%);
     overflow: hidden;
+    padding: 0;
 
     &[open] {
       animation: expand 0.4s ease-in-out forwards;
