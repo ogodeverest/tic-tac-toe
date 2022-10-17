@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { getContext } from "svelte";
   import Turn from "./Turn.svelte";
   import PlayersMarks from "./icons/PlayersMarks.svelte";
   import Button from "./Button.svelte";
@@ -23,7 +22,7 @@
            aspect-ratio: 1;"
     on:click={handleToggleConfirm}
   >
-    <RestartMark size="1em" color="var(--clr-body)" />
+    <RestartMark size="1.2em" color="var(--clr-body)" />
   </Button>
 </header>
 
