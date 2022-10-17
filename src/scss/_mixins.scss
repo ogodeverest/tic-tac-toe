@@ -1,3 +1,5 @@
+$border-radius: 10px;
+
 @mixin flex-center {
   display: flex;
   justify-content: center;
@@ -17,7 +19,7 @@
 @mixin box($color) {
   @include flex-center;
   background-color: $color;
-  border-radius: 10px;
+  border-radius: $border-radius;
 }
 
 @mixin key-button($shadow-color, $vertical-shadow: 4px) {
