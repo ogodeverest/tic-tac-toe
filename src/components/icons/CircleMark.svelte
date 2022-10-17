@@ -1,8 +1,9 @@
 <script lang="ts">
   export let style: string = "";
   export let size: string | number = "1rem";
-  export let theme: "primary" | "warm" | "cold" | "neutral" = "primary";
-  const color: string = `var(--clr-${theme})`;
+  export let theme: "primary" | "warm" | "cold" | "neutral" | "body" =
+    "primary";
+  $: color = `var(--clr-${theme})`;
 </script>
 
 <svg
