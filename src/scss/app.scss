@@ -1,28 +1,19 @@
 @import "./reset";
+@import "./utils";
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap");
-:root {
-  --clr-body: #192a32;
-  --clr-primary: #1f3540;
-  --clr-primary-darker: #142126;
-  --clr-cold: #31c4be;
-  --clr-cold-darker:#279b97;
-  --clr-warm: #f2b237;
-  --clr-warm-darker:#d8910e;
-  --clr-neutral: #a8bec9;
-  --clr-neutral-darker: #6d8794;
-}
+
 
 body {
-  background-color: var(--clr-body);
+  @extend .bg-body;
   text-transform: uppercase;
   font-family: "Lato", sans-serif;
   letter-spacing: 0.05em;
-  font-weight: 700;
+  @extend .fw-bold;
 }
 
 ::selection {
   color: var(--clr-body);
-  background-color: var(--clr-neutral);
+  @extend .bg-neutral;
 }
 
 body,
@@ -35,3 +26,4 @@ body,
   grid-template-columns: minmax(1em, 1fr) minmax(22em, 1fr) minmax(1em, 1fr);
   align-items: center;
 }
+

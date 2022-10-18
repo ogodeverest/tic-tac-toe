@@ -1,10 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import Stats from "./components/Stats.svelte";
-  import Grid from "./components/Grid.svelte";
-  import Header from "./components/Header.svelte";
-  import Intro from "./components/Intro.svelte";
-  import FinishModal from "./components/modals/FinishModal.svelte";
+  import Intro from "./views/intro/Intro.svelte";
+  import Game from "./views/game/Game.svelte";
   import store from "./store";
 
   onMount(() => store.loadFromStorage());
@@ -12,18 +9,13 @@
 
 <main>
   {#if $store}
-    <FinishModal />
-    <Header />
-    <Grid />
-    <Stats />
+    <Game />
   {:else}
     <Intro />
   {/if}
 </main>
 
 <style lang="scss">
-  @import "./scss/mixins";
-
   main {
     display: flex;
     flex-direction: column;

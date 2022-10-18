@@ -11,17 +11,17 @@
   }
 </script>
 
-<dialog class="dialog" bind:this={dialog}>
+<dialog class="dialog bg-primary" bind:this={dialog}>
   {#if show}
     <center in:fade>
       {#if $$slots.title}
-        <header class="dialog__header">
-          <h1 class="dialog__title">
+        <header>
+          <h1 class="fs-md clr-neutral">
             <slot name="title" />
           </h1>
         </header>
       {/if}
-      <section class="dialog__content">
+      <section class="fs-lg">
         <slot name="content" />
       </section>
       <footer class="dialog__footer">
@@ -48,7 +48,6 @@
     width: 100%;
     max-width: 100%;
     margin: 0;
-    background-color: var(--clr-primary);
     border: none;
     transform: translateY(-50%);
     overflow: hidden;
@@ -70,17 +69,6 @@
       justify-content: center;
       align-items: center;
       height: 100%;
-    }
-
-    &__header {
-      color: var(--clr-neutral);
-    }
-    &__title {
-      font-size: 1.1rem;
-    }
-
-    &__content {
-      font-size: max(1.7rem, 4vw);
     }
 
     &__footer {

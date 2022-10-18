@@ -1,12 +1,10 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
-  import Button from "../Button.svelte";
   import Dialog from "./Dialog.svelte";
-  import CrossMark from "../icons/CrossMark.svelte";
-  import CircleMark from "../icons/CircleMark.svelte";
-  import store from "../../store";
-  import playAudio from "../../utils/audioPlayer";
-  import type GameState from "../../utils/GameState";
+  import { Button, CrossMark, CircleMark } from "../../../components";
+  import store from "../../../store";
+  import playAudio from "../../../utils/audioPlayer";
+  import type GameState from "../../../utils/GameState";
 
   const iconProps = {
     size: "1.3em",
@@ -30,7 +28,7 @@
     {/if}
   </svelte:fragment>
   <svelte:fragment slot="content">
-    <h2 class={`message message--${$store.winner?.theme || "neutral"}`}>
+    <h2 class={`message clr-${$store.winner?.theme || "neutral"}`}>
       {#if $store.winner === $store.players.get("X")}
         <CrossMark theme="cold" {...iconProps} />
       {:else if $store.winner === $store.players.get("O")}
@@ -51,17 +49,5 @@
     font-size: inherit;
     display: flex;
     align-items: center;
-
-    &--cold {
-      color: var(--clr-cold);
-    }
-
-    &--warm {
-      color: var(--clr-warm);
-    }
-
-    &--neutral {
-      color: var(--clr-neutral);
-    }
   }
 </style>

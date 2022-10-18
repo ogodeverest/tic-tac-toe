@@ -1,8 +1,7 @@
 <script lang="ts">
-  import CircleMark from "./icons/CircleMark.svelte";
-  import CrossMark from "./icons/CrossMark.svelte";
-  import type { Mark } from "../utils/Player";
-  import clickSound from "../actions/clickSound";
+  import { CircleMark, CrossMark } from "../../../components";
+  import type { Mark } from "../../../utils/Player";
+  import clickSound from "../../../actions/clickSound";
 
   export let group: Mark;
   export let value: Mark;
@@ -12,7 +11,7 @@
   const size: string = "1.6rem";
 </script>
 
-<label class="mark-radio" use:clickSound={"grid"}>
+<label class="mark-radio box" use:clickSound={"grid"}>
   {#if value === "O"}
     <CircleMark {theme} {size} />
   {:else}
@@ -22,15 +21,10 @@
 </label>
 
 <style lang="scss">
-  @import "../scss/mixins";
   .mark-radio {
     flex-basis: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     cursor: pointer;
     height: 100%;
-    border-radius: $border-radius;
     &:has(input[type="radio"]:checked) {
       background-color: var(--clr-neutral);
     }

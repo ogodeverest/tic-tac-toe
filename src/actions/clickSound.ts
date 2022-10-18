@@ -1,9 +1,6 @@
-import playAudio from "../utils/audioPlayer";
+import playAudio, { type AudioOptions } from "../utils/audioPlayer";
 
-export default function clickSound(
-  node: HTMLElement,
-  audio: "button" | "grid"
-) {
+export default function clickSound(node: HTMLElement, audio: AudioOptions) {
   const handleClick = () => {
     playAudio(audio);
   };

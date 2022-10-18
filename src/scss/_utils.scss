@@ -1,0 +1,97 @@
+@import "./mixins";
+
+$colors : (
+  "body" : #192a32,
+  "primary":#1f3540,
+  "primary-darker": #142126,
+  "cold":#31c4be,
+  "cold-darker":#279b97,
+  "warm":#f2b237,
+  "warm-darker":#d8910e,
+  "neutral":#a8bec9,
+  "neutral-darker":#6d8794
+  );
+
+
+$sizes : (
+  "sm" :0.85rem,
+  "md" : 1rem,
+  "lg" :max(1.7rem, 4vw),
+);
+
+
+$weights :(
+  normal : 400,
+  bold: 700,
+  bolder:900
+
+);
+//variables
+:root {
+  @each $name,$color in $colors
+  {
+    --clr-#{$name} : #{$color};
+  }
+  @each $name,$size in $sizes
+  {
+    --fs-#{$name} : #{$size};
+  }
+}
+
+
+
+//font
+@each $name,$color in $colors
+{
+  .clr-#{$name}{
+    color: var(--clr-#{$name});
+  }
+  .fill-#{$name}{
+    fill: var(--clr-#{$name});
+  }
+  .stroke-#{$name}{
+    stroke: var(--clr-#{$name});
+  }
+}
+
+//sizes
+@each $name,$size in $sizes
+{
+  .fs-#{$name}{
+    font-size: var(--fs-#{$name});
+  }
+}
+
+
+
+//background
+@each $name,$color in $colors
+{
+  .bg-#{$name}{
+    background-color: var(--clr-#{$name});
+  }
+}
+
+
+//shadow
+@each $name,$color in $colors
+{
+  .shadow-#{$name}{
+    box-shadow: 0px 4px 0px 0px $color;
+   &:is(button):active {
+      transform: translateY(4px);
+    }
+  }
+}
+
+@each $name,$weight in $weights{
+  .fw-#{$name}{
+   font-weight: $weight;
+  }
+}
+
+//general
+.box{
+  @include flex-center;
+  border-radius: $border-radius;
+}

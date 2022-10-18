@@ -1,8 +1,6 @@
 <script lang="ts">
   import Turn from "./Turn.svelte";
-  import PlayersMarks from "./icons/PlayersMarks.svelte";
-  import Button from "./Button.svelte";
-  import RestartMark from "./icons/RestartMark.svelte";
+  import { RestartMark, Button, PlayersMarks } from "../../components";
   import RestartConfirm from "./modals/RestartConfirm.svelte";
   let show = false;
 
@@ -22,12 +20,12 @@
            aspect-ratio: 1;"
     on:click={handleToggleConfirm}
   >
-    <RestartMark size="1.2em" color="var(--clr-body)" />
+    <RestartMark size="1.2em" theme="body" />
   </Button>
 </header>
 
 <style lang="scss">
-  @import "../scss/mixins";
+  @import "../../scss/mixins";
   .header {
     @include main-grid;
     height: 2.4em;

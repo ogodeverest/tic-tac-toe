@@ -1,22 +1,19 @@
 <script lang="ts">
+  import type { Color, Size } from "../models/styleUtils";
   import clickSound from "../actions/clickSound";
-  import toCSSVariables from "../utils/CSSVariables";
+  import type { AudioOptions } from "../utils/audioPlayer";
 
   export let type: "button" | "submit" | "reset" = "button";
-  export let sound: "button" | "grid" = "button";
-  export let theme: "primary" | "warm" | "cold" | "neutral" = "primary";
-  export let disabled: boolean = false;
-  export let color: string = "var(--clr-body)";
-  export let fontSize: string = "1em";
+  export let sound: AudioOptions = "button";
+  export let theme: Color = "primary";
+  export let color: Color = "body";
+  export let size: Size = "md";
   export let style: string = "";
-
-  let bgColor: string = `var(--clr-${theme})`;
-  let shadowColor: string = `var(--clr-${theme}-darker)`;
-  style += toCSSVariables({ color, bgColor, shadowColor, fontSize });
+  export let disabled: boolean = false;
 </script>
 
 <button
-  class="button"
+  class={`button box bg-${theme} clr-${color} fs-${size} fw-bolder shadow-${theme}-darker`}
   {...{ disabled, type, style }}
   on:click
   use:clickSound={sound}
@@ -25,17 +22,13 @@
 </button>
 
 <style lang="scss">
-  @import "../scss/mixins";
-
   .button {
     appearance: none;
-    font-size: var(--fontSize);
-    text-transform: uppercase;
-    color: var(--color);
-    font-weight: 900;
+    outline: 0;
+    border: none;
+    text-transform: inherit;
     letter-spacing: inherit;
-    @include box(var(--bgColor));
-    @include key-button(var(--shadowColor), 5px);
+    cursor: pointer;
     padding: 1em 1.5em;
   }
 </style>

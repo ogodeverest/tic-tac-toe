@@ -1,8 +1,8 @@
 <script lang="ts">
   import { createEventDispatcher } from "svelte";
-  import Button from "../Button.svelte";
+  import { Button } from "../../../components";
   import Dialog from "./Dialog.svelte";
-  import store from "../../store";
+  import store from "../../../store";
   export let show: boolean = false;
 
   const dispatch = createEventDispatcher();

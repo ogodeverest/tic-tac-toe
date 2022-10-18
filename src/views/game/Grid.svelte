@@ -1,9 +1,7 @@
 <script lang="ts">
-  import CircleMark from "./icons/CircleMark.svelte";
-  import CrossMark from "./icons/CrossMark.svelte";
-  import Button from "./Button.svelte";
-  import store from "../store";
-  import type Position from "../models/Position.inferface";
+  import { Button, CrossMark, CircleMark } from "../../components";
+  import store from "../../store";
+  import type Position from "../../models/Position.inferface";
 
   const markSize = "clamp(2.5rem,5vw,6rem)";
 
@@ -32,7 +30,7 @@
 </section>
 
 <style lang="scss">
-  @import "../scss/mixins";
+  @import "../../scss/mixins";
   .grid {
     @include main-grid;
   }
