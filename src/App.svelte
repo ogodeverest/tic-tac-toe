@@ -1,10 +1,13 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import Stats from "./components/Stats.svelte";
   import Grid from "./components/Grid.svelte";
   import Header from "./components/Header.svelte";
   import Intro from "./components/Intro.svelte";
   import FinishModal from "./components/modals/FinishModal.svelte";
   import store from "./store";
+
+  onMount(() => store.loadFromStorage());
 </script>
 
 <main>

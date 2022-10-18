@@ -21,11 +21,6 @@ export default class CPU extends Player {
     });
   }
 
-  public toJSON(): string {
-    const { toJSON, move, ...rest } = this;
-    return JSON.stringify(rest);
-  }
-
   static fromStorage(data: Partial<CPU>): CPU {
     const { mark, ties, wins }: Partial<CPU> = data;
     const player: CPU = new CPU(mark);

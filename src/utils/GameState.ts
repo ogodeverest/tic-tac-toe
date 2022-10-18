@@ -1,19 +1,19 @@
-import type Player from "./Player";
+import Player, { type Mark } from "./Player";
 import type { Players } from "./Player";
 import type Position from "../models/Position.inferface";
 import CPU from "./CPU";
 
 const gridSize = 3;
 
-export type Row = (Player | null)[];
+export type Row = Player[];
 export type Grid = Row[];
 
 const emptyGrid: Grid = Array(3).fill(Array(3).fill(null));
 
 export default class GameState {
   grid: Grid = emptyGrid;
-  current: Player = null;
-  winner: Player = null;
+  current: Player;
+  winner: Player;
   players: Players;
   finished: boolean = false;
   stalled: boolean = false;
@@ -21,12 +21,14 @@ export default class GameState {
   constructor(players: Players, grid: Grid = emptyGrid) {
     this.grid = grid;
     this.players = players;
-    this.winner = this.current = players.get("X");
+    this.current = players.get("X");
     this.stalled = this.current instanceof CPU;
   }
 
   public newRound(): GameState {
-    return new GameState(this.players, emptyGrid);
+    const nextState = new GameState(this.players, emptyGrid);
+    nextState.winner = null;
+    return nextState;
   }
 
   public restart(): GameState {
@@ -42,17 +44,21 @@ export default class GameState {
     return this.players.get("O");
   }
 
-  private transform(
-    fn: (row: Row, player: Player, y: number, x: number) => any
+  private static transformMatrix(
+    grid: any[][],
+    fn: (row: any[], cell: any, y: number, x: number) => any
   ): Array<any> {
-    return this.grid.map((row, y) => row.map((col, x) => fn(row, col, y, x)));
+    return grid.map((row, y) => row.map((cell, x) => fn(row, cell, y, x)));
   }
 
   public mark(position: Position): GameState {
-    const newGrid: Grid = this.transform((row, player, y, x) => {
-      if (y === position.y && x === position.x) return this.current;
-      else return player;
-    });
+    const newGrid: Grid = GameState.transformMatrix(
+      this.grid,
+      (row, player, y, x) => {
+        if (y === position.y && x === position.x) return this.current;
+        else return player;
+      }
+    );
     const nextState = new GameState(this.players, newGrid);
     const noMoves = newGrid.every((row) => row.every((tile) => tile));
     nextState.winner = GameState.checkForWinner(newGrid, position);
@@ -77,13 +83,17 @@ export default class GameState {
   public toJSON(): string {
     return JSON.stringify({
       ...this,
-      grid: this.transform((row, player, y, x) => player && player.toJSON()),
-      players: [this.players.get("X").toJSON(), this.players.get("O").toJSON()],
-      current: this.current.toJSON(),
+      grid: GameState.transformMatrix(
+        this.grid,
+        (row, player, y, x) => player && player.mark
+      ),
+      players: [this.players.get("X"), this.players.get("O")],
+      current: this.current.mark,
+      winner: this.winner?.mark,
     });
   }
 
-  private static checkForWinner(grid: Grid, { x, y }: Position): Player | null {
+  private static checkForWinner(grid: Grid, { x, y }: Position): Player {
     const player = grid[y][x];
     for (let i = 0; i < gridSize; i++) {
       if (grid[y][i] !== player) break;
@@ -113,29 +123,46 @@ export default class GameState {
     }
   }
 
-  // public static fromJSON(data:string): null | GameState {
-  //   const saved = JSON.parse(data);
+  public static fromStorage({
+    grid: savedGrid,
+    players: savedPlayers,
+    current: savedCurrent,
+    stalled,
+    finished,
+    winner,
+  }: {
+    grid: Mark[][];
+    players: Partial<Player>[];
+    current: Mark;
+    stalled: boolean;
+    finished: boolean;
+    winner: Mark;
+  }): GameState {
+    function loadPlayer(player: Partial<Player>) {
+      if (!player) return null;
+      else if (player.cpu) return CPU.fromStorage(player);
+      else return Player.fromStorage(player);
+    }
 
-  //   if (saved) {
-  //     const { grid, players } = saved;
+    const players: Players = new Map();
 
-  //     console.log(grid);
-  //     const newGrid = grid.map((row: (Partial<Player> | null)[]) =>
-  //       row.map(
-  //         (player: Partial<Player> | null) =>
-  //           player && Player.fromObject(player)
-  //       )
-  //     );
+    savedPlayers.forEach((player: Partial<Player>) =>
+      players.set(player.mark, loadPlayer(player))
+    );
 
-  //     const [playerX, playerO]: Array<Player> = players;
+    const grid = GameState.transformMatrix(
+      savedGrid,
+      (row, mark, y, x) => mark && players.get(mark)
+    );
 
-  //     const newPlayers: Map<Mark, Player> = new Map();
-  //     newPlayers.set("X", playerX.cpu ? new CPU("X") : new Player("X"));
-  //     newPlayers.set("O", playerO.cpu ? new CPU("O") : new Player("O"));
+    const current = players.get(savedCurrent);
 
-  //     console.log(new GameState(newPlayers, newGrid));
-  //     return new GameState(newPlayers, newGrid);
-  //   }
-  //   return null;
-  // }
+    const gameState = new GameState(players, grid);
+    gameState.current = current;
+    gameState.finished = finished;
+    gameState.stalled = stalled;
+    gameState.winner = winner && players.get(winner);
+
+    return gameState;
+  }
 }

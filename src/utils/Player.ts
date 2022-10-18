@@ -17,11 +17,6 @@ export default class Player {
     this.ties = 0;
   }
 
-  public toJSON(): string {
-    const { toJSON, ...rest } = this;
-    return JSON.stringify(rest);
-  }
-
   static fromStorage(data: Partial<Player>): Player {
     const { mark, ties, wins }: Partial<Player> = data;
     const player: Player = new Player(mark);
