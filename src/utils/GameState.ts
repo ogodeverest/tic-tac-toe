@@ -17,6 +17,7 @@ export default class GameState {
   players: Players;
   finished: boolean = false;
   stalled: boolean = false;
+  winTrio: number[][];
 
   constructor(players: Players, grid: Grid = emptyGrid) {
     this.grid = grid;
@@ -61,7 +62,10 @@ export default class GameState {
     );
     const nextState = new GameState(this.players, newGrid);
     const noMoves = newGrid.every((row) => row.every((tile) => tile));
-    nextState.winner = GameState.checkForWinner(newGrid, position);
+    const { winner, winTrio } = GameState.checkForWinner(newGrid, position);
+    nextState.winner = winner;
+    nextState.winTrio = winTrio;
+
     nextState.finished = !!nextState.winner || noMoves;
     nextState.current = nextState.winner || this.getNextPlayer();
     nextState.stalled = nextState.current instanceof CPU;
@@ -93,34 +97,57 @@ export default class GameState {
     });
   }
 
-  private static checkForWinner(grid: Grid, { x, y }: Position): Player {
-    const player = grid[y][x];
+  private static checkForWinner(
+    grid: Grid,
+    { x, y }: Position
+  ): { winner: Player; winTrio: number[][] } {
+    const current = grid[y][x];
+    let winTrio: number[][] = [];
+
     for (let i = 0; i < gridSize; i++) {
-      if (grid[y][i] !== player) break;
-      if (i === gridSize - 1) return player;
+      winTrio.push([y, i]);
+      if (grid[y][i] !== current) {
+        winTrio = [];
+        break;
+      }
+      if (i === gridSize - 1) return { winner: current, winTrio };
     }
 
     for (let i = 0; i < gridSize; i++) {
-      if (grid[i][x] !== player) break;
-      if (i === gridSize - 1) return player;
+      winTrio.push([i, x]);
+      if (grid[i][x] !== current) {
+        winTrio = [];
+        break;
+      }
+      if (i === gridSize - 1) return { winner: current, winTrio };
     }
 
     //check diag
     if (x === y) {
       //we're on a diagonal
       for (let i = 0; i < gridSize; i++) {
-        if (grid[i][i] !== player) break;
-        if (i === gridSize - 1) return player;
+        winTrio.push([i, i]);
+        if (grid[i][i] !== current) {
+          winTrio = [];
+          break;
+        }
+        if (i === gridSize - 1) return { winner: current, winTrio };
       }
     }
 
     //check anti diag
     if (x + y === gridSize - 1) {
       for (let i = 0; i < gridSize; i++) {
-        if (grid[i][gridSize - 1 - i] !== player) break;
-        if (i === gridSize - 1) return player;
+        winTrio.push([i, gridSize - 1 - i]);
+        if (grid[i][gridSize - 1 - i] !== current) {
+          winTrio = [];
+          break;
+        }
+        if (i === gridSize - 1) return { winner: current, winTrio };
       }
     }
+
+    return { winner: null, winTrio };
   }
 
   public static fromStorage({
