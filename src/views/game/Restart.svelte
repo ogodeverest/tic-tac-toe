@@ -1,17 +1,10 @@
-<script lang="ts">
-  import type { Color } from "../../models/styleUtils";
-
-  export let size: string | number = "1em";
-  export let theme: Color = "neutral";
-</script>
-
 <svg
   xmlns="http://www.w3.org/2000/svg"
   version="1.1"
   viewBox="0 0 463.4 463.4"
   style="enable-background:new 0 0 489.645 489.645;"
-  width={size}
-  class={`fill-${theme} stroke-${theme}`}
+  width={"1.1rem"}
+  class={`fill-body stroke-body`}
 >
   <g transform="matrix(-0.929245, 0, 0, -0.950322, 457.994537, 464.019318)">
     <path

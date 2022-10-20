@@ -1,7 +1,8 @@
 <script lang="ts">
   import Turn from "./Turn.svelte";
-  import { RestartMark, Button, PlayersMarks } from "../../components";
+  import { Button, Marks } from "../../components";
   import RestartConfirm from "./modals/RestartConfirm.svelte";
+  import Restart from "./Restart.svelte";
   let show = false;
 
   function handleToggleConfirm() {
@@ -11,7 +12,7 @@
 
 <RestartConfirm {show} on:toggleConfirm={handleToggleConfirm} />
 <header class="header">
-  <PlayersMarks />
+  <Marks />
   <Turn />
   <Button
     theme="neutral"
@@ -20,7 +21,7 @@
            aspect-ratio: 1;"
     on:click={handleToggleConfirm}
   >
-    <RestartMark size="1.2em" theme="body" />
+    <Restart />
   </Button>
 </header>
 

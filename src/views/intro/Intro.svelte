@@ -1,6 +1,6 @@
 <script lang="ts">
   import MarkSelect from "./mark-select/MarkSelect.svelte";
-  import { Button, PlayersMarks } from "../../components";
+  import { Button, Marks } from "../../components";
   import store from "../../store";
   import type { Mark, Players } from "../../utils/Player";
   import Player from "../../utils/Player";
@@ -25,7 +25,7 @@
 </script>
 
 <section class="intro">
-  <PlayersMarks />
+  <Marks />
 
   <div class="intro__picker box bg-primary shadow-primary-darker">
     <h1 class="intro__heading clr-neutral fs-sm">Pick player 1's mark</h1>
