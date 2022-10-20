@@ -1,15 +1,10 @@
 <script type="ts">
   import store from "../../store";
-  import { CircleMark, CrossMark } from "../../components";
-  const markSize: string = "1.1em";
+  import { PlayerMark } from "../../components";
 </script>
 
 <div class="turn box bg-primary clr-neutral shadow-primary-darker">
-  {#if $store.current === $store.players.get("O")}
-    <CircleMark size={markSize} theme="neutral" />
-  {:else}
-    <CrossMark size={markSize} theme="neutral" />
-  {/if}
+  <PlayerMark player={$store.current} size="1.1em" theme="neutral" />
   <span class="fs-sm">turn</span>
 </div>
 

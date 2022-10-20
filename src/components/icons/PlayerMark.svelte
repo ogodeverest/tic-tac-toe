@@ -1,11 +1,7 @@
 <script lang="ts">
   import type Player from "../../utils/Player";
-  import CircleMark from "./CircleMark.svelte";
-  import CrossMark from "./CrossMark.svelte";
+  import marks from "../../utils/marks";
   export let player: Player;
 </script>
 
-<svelte:component
-  this={player.mark === "X" ? CrossMark : CircleMark}
-  {...$$props}
-/>
+<svelte:component this={marks.get(player.mark)} {...$$props} />

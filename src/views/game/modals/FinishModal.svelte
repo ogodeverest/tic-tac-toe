@@ -1,15 +1,10 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
   import Dialog from "./Dialog.svelte";
-  import { Button, CrossMark, CircleMark } from "../../../components";
+  import { Button, PlayerMark } from "../../../components";
   import store from "../../../store";
   import playAudio from "../../../utils/audioPlayer";
   import type GameState from "../../../utils/GameState";
-
-  const iconProps = {
-    size: "1.3em",
-    style: "margin-right:.5em",
-  };
 
   const unsubscribe = store.subscribe((state: GameState) => {
     if (state?.finished) {
@@ -29,12 +24,17 @@
   </svelte:fragment>
   <svelte:fragment slot="content">
     <h2 class={`message clr-${$store.winner?.theme || "neutral"}`}>
-      {#if $store.winner === $store.players.get("X")}
-        <CrossMark theme="cold" {...iconProps} />
-      {:else if $store.winner === $store.players.get("O")}
-        <CircleMark theme="warm" {...iconProps} />
+      {#if $store.winner}
+        <PlayerMark
+          player={$store.winner}
+          theme={$store.winner.theme}
+          size="1.3em"
+          style="margin-right:.5em"
+        />
+        Takes the round
+      {:else}
+        Players tied
       {/if}
-      {$store.winner ? "Takes the round" : "Players tied"}
     </h2>
   </svelte:fragment>
   <svelte:fragment slot="footer">

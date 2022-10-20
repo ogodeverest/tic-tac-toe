@@ -1,22 +1,18 @@
 <script lang="ts">
-  import { CircleMark, CrossMark } from "../../../components";
-  import type { Mark } from "../../../utils/Player";
   import clickSound from "../../../actions/clickSound";
+  import marks from "../../../utils/marks";
+  import type { Mark } from "../../../utils/Player";
 
   export let group: Mark;
   export let value: Mark;
-  let theme: "body" | "neutral";
-
-  $: theme = value === group ? "body" : "neutral";
-  const size: string = "1.6rem";
 </script>
 
 <label class="mark-radio box" use:clickSound={"grid"}>
-  {#if value === "O"}
-    <CircleMark {theme} {size} />
-  {:else}
-    <CrossMark {theme} {size} />
-  {/if}
+  <svelte:component
+    this={marks.get(value)}
+    size="1.6rem"
+    theme={value === group ? "body" : "neutral"}
+  />
   <input type="radio" name="mark" bind:group {value} />
 </label>
 
