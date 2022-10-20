@@ -8,11 +8,7 @@
 </script>
 
 <main>
-  {#if $store}
-    <Game />
-  {:else}
-    <Intro />
-  {/if}
+  <svelte:component this={$store ? Game : Intro} />
 </main>
 
 <style lang="scss">

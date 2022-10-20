@@ -18,7 +18,6 @@ function createStore() {
   function loadFromStorage() {
     const savedState = JSON.parse(localStorage.getItem("gameState"));
     if (savedState) {
-      console.log(GameState.fromStorage(savedState));
       set(GameState.fromStorage(savedState));
     }
   }

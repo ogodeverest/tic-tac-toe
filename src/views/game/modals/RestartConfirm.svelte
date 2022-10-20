@@ -19,7 +19,7 @@
 
 <Dialog {show}>
   <svelte:fragment slot="content">
-    <h2 class="message">Restart game?</h2>
+    <h2 class="message clr-neutral">Restart game?</h2>
   </svelte:fragment>
   <svelte:fragment slot="footer">
     <Button theme="neutral" on:click={handleCancel}>No, cancel</Button>
@@ -29,7 +29,6 @@
 
 <style lang="scss">
   .message {
-    color: var(--clr-neutral);
     font-size: inherit;
   }
 </style>
