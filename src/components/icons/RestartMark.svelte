@@ -11,7 +11,6 @@
   viewBox="0 0 463.4 463.4"
   style="enable-background:new 0 0 489.645 489.645;"
   width={size}
-  height={size}
   class={`fill-${theme} stroke-${theme}`}
 >
   <g transform="matrix(-0.929245, 0, 0, -0.950322, 457.994537, 464.019318)">

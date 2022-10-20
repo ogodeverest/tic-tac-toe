@@ -11,7 +11,6 @@
   xmlns="http://www.w3.org/2000/svg"
   viewBox="17.322 17.321 463.358 463.359"
   width={size}
-  height={size}
   {style}
 >
   <ellipse

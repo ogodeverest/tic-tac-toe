@@ -6,6 +6,6 @@
 </script>
 
 <svelte:component
-  this={player.mark === "X" ? CircleMark : CrossMark}
+  this={player.mark === "X" ? CrossMark : CircleMark}
   {...$$props}
 />

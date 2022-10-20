@@ -9,7 +9,7 @@ export default class Player {
 
   constructor(mark: Mark) {
     this.mark = mark;
-    this.theme = mark === "O" ? "warm" : "cold";
+    this.theme = mark === "X" ? "cold" : "warm";
   }
 
   reset() {
