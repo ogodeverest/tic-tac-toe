@@ -2,24 +2,25 @@
   import MarkSelect from "./mark-select/MarkSelect.svelte";
   import { Button, Marks } from "@components";
   import store from "@/store";
-  import type { Mark, Players } from "@utils/Player";
-  import Player from "@/utils/Player";
-  import CPU from "@/utils/CPU";
-
-  let selectedMark: Mark = "X";
+  import Player from "@utils/Player";
+  import type { Players } from "@utils/Player";
 
   const players: Players = new Map();
+  players.set("X", new Player("X"));
+  players.set("O", new Player("O"));
+
+  let selectedPlayer: Player = players.get("X");
+  let opponent: Player;
+
+  $: opponent =
+    selectedPlayer === players.get("X") ? players.get("O") : players.get("X");
 
   function handleNewPVP() {
-    players.set("X", new Player("X"));
-    players.set("O", new Player("O"));
     store.create(players);
   }
 
   function handleNewPVC() {
-    const cpuMark: Mark = selectedMark === "X" ? "O" : "X";
-    players.set(selectedMark, new Player(selectedMark));
-    players.set(cpuMark, new CPU(cpuMark));
+    opponent.cpu = true;
     store.create(players);
   }
 </script>
@@ -29,7 +30,7 @@
 
   <div class="intro__picker box bg-primary shadow-primary-darker">
     <h1 class="intro__heading clr-neutral fs-sm">Pick player 1's mark</h1>
-    <MarkSelect bind:group={selectedMark} />
+    <MarkSelect {players} bind:group={selectedPlayer} />
     <p class="intro__hint clr-neutral">Remember X goes first</p>
   </div>
   <Button theme="warm" style="width: 100%;" on:click={handleNewPVC}

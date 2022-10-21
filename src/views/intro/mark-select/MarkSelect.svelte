@@ -1,13 +1,15 @@
 <script lang="ts">
   import MarkRadio from "./MarkRadio.svelte";
-  import type { Mark } from "@utils/Player";
+  import type Player from "@utils/Player";
+  import type { Players } from "@utils/Player";
 
-  export let group: Mark;
+  export let group: Player;
+  export let players: Players;
 </script>
 
 <div class="mark-select box bg-body">
-  <MarkRadio value="X" bind:group />
-  <MarkRadio value="O" bind:group />
+  <MarkRadio value={players.get("X")} bind:group />
+  <MarkRadio value={players.get("O")} bind:group />
 </div>
 
 <style lang="scss">

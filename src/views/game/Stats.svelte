@@ -1,11 +1,10 @@
 <script lang="ts">
-  import CPU from "@utils/CPU";
   import type GameState from "@utils/GameState";
   import type { Mark } from "@utils/Player";
   import store from "@/store";
 
   function renderLabel(state: GameState, mark: Mark): string {
-    if (state.players.get(mark) instanceof CPU) return "(CPU)";
+    if (state.players.get(mark).cpu) return "(CPU)";
     if (state.players.get(mark) === state.current) return "(YOU)";
     return "";
   }

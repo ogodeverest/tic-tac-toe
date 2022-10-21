@@ -1,7 +1,6 @@
 import Player, { type Mark } from "./Player";
 import type { Players } from "./Player";
 import type Position from "@models/Position.inferface";
-import CPU from "./CPU";
 
 const gridSize = 3;
 
@@ -23,7 +22,7 @@ export default class GameState {
     this.grid = grid;
     this.players = players;
     this.current = players.get("X");
-    this.stalled = this.current instanceof CPU;
+    this.stalled = this.current.cpu;
   }
 
   public newRound(): GameState {
@@ -68,7 +67,7 @@ export default class GameState {
 
     nextState.finished = !!nextState.winner || noMoves;
     nextState.current = nextState.winner || this.getNextPlayer();
-    nextState.stalled = nextState.current instanceof CPU;
+    nextState.stalled = nextState.current.cpu;
     if (nextState.finished) {
       nextState.writeStats();
     }
@@ -165,16 +164,10 @@ export default class GameState {
     finished: boolean;
     winner: Mark;
   }): GameState {
-    function loadPlayer(player: Partial<Player>) {
-      if (!player) return null;
-      else if (player.cpu) return CPU.fromStorage(player);
-      else return Player.fromStorage(player);
-    }
-
     const players: Players = new Map();
 
     savedPlayers.forEach((player: Partial<Player>) =>
-      players.set(player.mark, loadPlayer(player))
+      players.set(player.mark, player && Player.fromStorage(player))
     );
 
     const grid = GameState.transformMatrix(

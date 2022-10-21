@@ -1,18 +1,19 @@
 <script lang="ts">
   import clickSound from "@actions/clickSound";
-  import marks from "@utils/marks";
-  import type { Mark } from "@utils/Player";
+  import PlayerMark from "@components/PlayerMark.svelte";
+  import type Player from "@utils/Player";
 
-  export let group: Mark;
-  export let value: Mark;
+  export let group: Player;
+  export let value: Player;
 </script>
 
 <label class="mark-radio box" use:clickSound={"grid"}>
-  <svelte:component
-    this={marks.get(value)}
+  <PlayerMark
+    player={value}
     size="1.6rem"
     theme={value === group ? "body" : "neutral"}
   />
+
   <input type="radio" name="mark" bind:group {value} />
 </label>
 

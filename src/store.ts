@@ -2,7 +2,6 @@ import { writable } from "svelte/store";
 import GameState from "@utils/GameState";
 import type Position from "@models/Position.inferface";
 import type { Players } from "@utils/Player";
-import CPU from "@utils/CPU";
 
 function saveGameState(gameState: GameState) {
   localStorage.setItem("gameState", gameState.toJSON());
@@ -59,7 +58,7 @@ function createStore() {
   }
 
   subscribe((state: GameState) => {
-    if (state?.current instanceof CPU && !state?.finished) {
+    if (state?.current.cpu && !state?.finished) {
       state.current.move(state.grid).then((position) => mark(position));
     }
   });
