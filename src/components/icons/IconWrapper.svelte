@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { Color } from "@models/styleUtils";
+  import type Color from "@types/Color";
 
   export let style: string = "";
   export let size: string | number = "1rem";

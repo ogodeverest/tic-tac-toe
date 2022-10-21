@@ -1,4 +1,4 @@
-import type Position from "@models/Position.inferface";
+import type Position from "@types/Position.inferface";
 import type { Grid } from "./GameState";
 
 export type Mark = "X" | "O";

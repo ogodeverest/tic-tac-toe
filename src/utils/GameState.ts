@@ -1,6 +1,6 @@
 import Player, { type Mark } from "./Player";
 import type { Players } from "./Player";
-import type Position from "@models/Position.inferface";
+import type Position from "@types/Position.inferface";
 
 const gridSize = 3;
 
@@ -15,14 +15,12 @@ export default class GameState {
   winner: Player;
   players: Players;
   finished: boolean = false;
-  stalled: boolean = false;
   winTrio: number[][];
 
   constructor(players: Players, grid: Grid = emptyGrid) {
     this.grid = grid;
     this.players = players;
     this.current = players.get("X");
-    this.stalled = this.current.cpu;
   }
 
   public newRound(): GameState {
@@ -67,7 +65,6 @@ export default class GameState {
 
     nextState.finished = !!nextState.winner || noMoves;
     nextState.current = nextState.winner || this.getNextPlayer();
-    nextState.stalled = nextState.current.cpu;
     if (nextState.finished) {
       nextState.writeStats();
     }
@@ -153,14 +150,12 @@ export default class GameState {
     grid: savedGrid,
     players: savedPlayers,
     current: savedCurrent,
-    stalled,
     finished,
     winner,
   }: {
     grid: Mark[][];
     players: Partial<Player>[];
     current: Mark;
-    stalled: boolean;
     finished: boolean;
     winner: Mark;
   }): GameState {
@@ -180,7 +175,6 @@ export default class GameState {
     const gameState = new GameState(players, grid);
     gameState.current = current;
     gameState.finished = finished;
-    gameState.stalled = stalled;
     gameState.winner = winner && players.get(winner);
 
     return gameState;

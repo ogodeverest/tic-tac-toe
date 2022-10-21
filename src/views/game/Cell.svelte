@@ -2,7 +2,7 @@
   import { PlayerMark, Button } from "@components";
   import type GameState from "@utils/GameState";
   import type Player from "@utils/Player";
-  import type Position from "@models/Position.inferface";
+  import type Position from "@types/Position.inferface";
   import store from "@/store";
 
   export let player: Player;
@@ -17,7 +17,7 @@
 
 <Button
   on:click={() => store.mark(position)}
-  disabled={!!player || $store.stalled || $store.finished}
+  disabled={!!player || $store.current.cpu || $store.finished}
   sound="grid"
   style="aspect-ratio:1;"
   theme={hasWon($store) ? player?.theme : "primary"}

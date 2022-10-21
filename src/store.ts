@@ -1,6 +1,6 @@
 import { writable } from "svelte/store";
 import GameState from "@utils/GameState";
-import type Position from "@models/Position.inferface";
+import type Position from "@types/Position.inferface";
 import type { Players } from "@utils/Player";
 
 function saveGameState(gameState: GameState) {
