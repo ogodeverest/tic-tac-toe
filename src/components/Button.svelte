@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Color, Size } from "../models/styleUtils";
-  import clickSound from "../actions/clickSound";
-  import type { AudioOptions } from "../utils/audioPlayer";
+  import type { Color, Size } from "@models/styleUtils";
+  import clickSound from "@actions/clickSound";
+  import type { AudioOptions } from "@utils/audioPlayer";
 
   export let type: "button" | "submit" | "reset" = "button";
   export let sound: AudioOptions = "button";

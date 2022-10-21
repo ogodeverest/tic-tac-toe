@@ -1,4 +1,4 @@
-import type Position from "../models/Position.inferface";
+import type Position from "@models/Position.inferface";
 import type { Grid } from "./GameState";
 import Player from "./Player";
 

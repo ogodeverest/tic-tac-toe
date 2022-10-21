@@ -1,10 +1,10 @@
 <script lang="ts">
   import MarkSelect from "./mark-select/MarkSelect.svelte";
-  import { Button, Marks } from "../../components";
-  import store from "../../store";
-  import type { Mark, Players } from "../../utils/Player";
-  import Player from "../../utils/Player";
-  import CPU from "../../utils/CPU";
+  import { Button, Marks } from "@components";
+  import store from "@/store";
+  import type { Mark, Players } from "@utils/Player";
+  import Player from "@/utils/Player";
+  import CPU from "@/utils/CPU";
 
   let selectedMark: Mark = "X";
 

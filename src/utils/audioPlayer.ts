@@ -1,7 +1,7 @@
-import button from "../assets/audios/button.wav";
-import grid from "../assets/audios/grid.wav";
-import win from "../assets/audios/win.wav";
-import tie from "../assets/audios/tie.wav";
+import button from "@assets/audios/button.wav";
+import grid from "@assets/audios/grid.wav";
+import win from "@assets/audios/win.wav";
+import tie from "@assets/audios/tie.wav";
 
 export type AudioOptions = "button" | "grid" | "win" | "tie";
 

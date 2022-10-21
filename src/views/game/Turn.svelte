@@ -1,6 +1,6 @@
 <script type="ts">
-  import store from "../../store";
-  import { PlayerMark } from "../../components";
+  import store from "@/store";
+  import { PlayerMark } from "@components";
 </script>
 
 <div class="turn box bg-primary clr-neutral shadow-primary-darker">

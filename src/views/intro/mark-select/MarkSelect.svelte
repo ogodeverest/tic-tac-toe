@@ -1,6 +1,6 @@
 <script lang="ts">
   import MarkRadio from "./MarkRadio.svelte";
-  import type { Mark } from "../../../utils/Player";
+  import type { Mark } from "@utils/Player";
 
   export let group: Mark;
 </script>

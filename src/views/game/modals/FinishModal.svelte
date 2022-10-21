@@ -1,10 +1,10 @@
 <script lang="ts">
   import { onDestroy } from "svelte";
   import Dialog from "./Dialog.svelte";
-  import { Button, PlayerMark } from "../../../components";
-  import store from "../../../store";
-  import playAudio from "../../../utils/audioPlayer";
-  import type GameState from "../../../utils/GameState";
+  import { Button, PlayerMark } from "@components";
+  import playAudio from "@utils/audioPlayer";
+  import store from "@/store";
+  import type GameState from "@utils/GameState";
 
   const unsubscribe = store.subscribe((state: GameState) => {
     if (state?.finished) {

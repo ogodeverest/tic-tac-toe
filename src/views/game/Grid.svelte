@@ -1,5 +1,5 @@
 <script lang="ts">
-  import store from "../../store";
+  import store from "@/store";
   import Cell from "./Cell.svelte";
 </script>
 

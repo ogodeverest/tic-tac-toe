@@ -1,8 +1,9 @@
 <script lang="ts">
   import Turn from "./Turn.svelte";
-  import { Button, Marks } from "../../components";
   import RestartConfirm from "./modals/RestartConfirm.svelte";
   import Restart from "./Restart.svelte";
+  import { Button, Marks } from "@components";
+
   let show = false;
 
   function handleToggleConfirm() {

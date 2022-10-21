@@ -1,10 +1,9 @@
 <script lang="ts">
-  import Button from "../../components/Button.svelte";
-  import store from "../../store";
-  import type GameState from "../../utils/GameState";
-  import type Player from "../../utils/Player";
-  import type Position from "../../models/Position.inferface";
-  import { PlayerMark } from "../../components";
+  import type GameState from "@/utils/GameState";
+  import type Player from "@utils/Player";
+  import type Position from "@models/Position.inferface";
+  import { PlayerMark, Button } from "@components";
+  import store from "@/store";
 
   export let player: Player;
   export let position: Position;

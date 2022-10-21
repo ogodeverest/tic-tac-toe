@@ -1,7 +1,7 @@
 <script lang="ts">
-  import clickSound from "../../../actions/clickSound";
-  import marks from "../../../utils/marks";
-  import type { Mark } from "../../../utils/Player";
+  import clickSound from "@actions/clickSound";
+  import marks from "@utils/marks";
+  import type { Mark } from "@utils/Player";
 
   export let group: Mark;
   export let value: Mark;
