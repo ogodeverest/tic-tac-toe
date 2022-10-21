@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type GameState from "src/utils/GameState";
-  import type { Mark } from "src/utils/Player";
+  import type GameState from "../../utils/GameState";
+  import type { Mark } from "../../utils/Player";
   import store from "../../store";
   import CPU from "../../utils/CPU";
 

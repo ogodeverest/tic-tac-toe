@@ -1,18 +1,8 @@
 <script lang="ts">
-  import type { Color } from "../../models/styleUtils";
-
-  export let style: string = "";
-  export let size: string | number = "1rem";
-  export let theme: Color = "warm";
+  import IconWrapper from "./IconWrapper.svelte";
 </script>
 
-<svg
-  class={`stroke-${theme}`}
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="17.322 17.321 463.358 463.359"
-  width={size}
-  {style}
->
+<IconWrapper {...$$props}>
   <ellipse
     fill="none"
     stroke-width="125px"
@@ -21,4 +11,4 @@
     rx="170"
     ry="170"
   />
-</svg>
+</IconWrapper>

@@ -1,18 +1,8 @@
 <script lang="ts">
-  import type { Color } from "../../models/styleUtils";
-
-  export let style: string = "";
-  export let size: string | number = "1rem";
-  export let theme: Color = "cold";
+  import IconWrapper from "./IconWrapper.svelte";
 </script>
 
-<svg
-  class={`fill-${theme}`}
-  xmlns="http://www.w3.org/2000/svg"
-  viewBox="17.322 17.321 463.358 463.359"
-  width={size}
-  {style}
->
+<IconWrapper {...$$props}>
   <g transform="matrix(1, 0, 0, 1, -3.331085, 6.662214)">
     <rect
       transform="matrix(0.707107, 0.707107, -0.707107, 0.707107, 365.859589, -142.93132)"
@@ -33,4 +23,4 @@
       ry="14"
     />
   </g>
-</svg>
+</IconWrapper>
