@@ -64,12 +64,12 @@
 
     & > center {
       display: flex;
-      gap: 2em;
+      gap: var(--default-gap);
       height: 100%;
     }
 
     &__footer {
-      gap: 1em;
+      gap: var(--default-gap);
     }
   }
 </style>

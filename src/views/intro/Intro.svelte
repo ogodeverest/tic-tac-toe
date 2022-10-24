@@ -43,7 +43,7 @@
 
 <style lang="scss">
   .intro {
-    row-gap: 1.5em;
+    gap: var(--default-gap);
 
     &__picker {
       width: 100%;

@@ -21,7 +21,7 @@
   .mark-radio {
     flex-basis: 100%;
     cursor: pointer;
-    height: 100%;
+    height: 4em;
     &:has(input[type="radio"]:checked) {
       background-color: var(--clr-neutral);
     }

@@ -1,6 +1,6 @@
 import Player, { type Mark } from "./Player";
 import type { Players } from "./Player";
-import type Position from "@types/Position.inferface";
+import type Position from "@/types/Position.inferface";
 
 const gridSize = 3;
 

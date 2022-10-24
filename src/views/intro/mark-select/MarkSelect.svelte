@@ -15,7 +15,6 @@
 <style lang="scss">
   .mark-select {
     width: 100%;
-    height: 4em;
     padding: 0.3em;
     margin-block: 1em;
   }

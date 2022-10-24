@@ -13,7 +13,7 @@
 
 <style lang="scss">
   main {
-    gap: 1.5rem;
+    gap: var(--default-gap);
     grid-column: 2/-2;
   }
 </style>
