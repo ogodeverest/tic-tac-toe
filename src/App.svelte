@@ -7,15 +7,13 @@
   onMount(() => store.loadFromStorage());
 </script>
 
-<main>
+<main class="flex-column">
   <svelte:component this={$store ? Game : Intro} />
 </main>
 
 <style lang="scss">
   main {
-    display: flex;
-    flex-direction: column;
     gap: 1.5rem;
-    grid-column: 2/3;
+    grid-column: 2/-2;
   }
 </style>

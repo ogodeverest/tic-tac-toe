@@ -12,7 +12,7 @@
 </script>
 
 <RestartConfirm {show} on:toggleConfirm={handleToggleConfirm} />
-<header class="header">
+<header class="header main-grid">
   <Marks />
   <Turn />
   <Button
@@ -25,11 +25,3 @@
     <Restart />
   </Button>
 </header>
-
-<style lang="scss">
-  @import "../../scss/mixins";
-  .header {
-    @include main-grid;
-    height: 2.4em;
-  }
-</style>

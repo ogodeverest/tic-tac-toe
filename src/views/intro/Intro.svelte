@@ -25,10 +25,10 @@
   }
 </script>
 
-<section class="intro">
+<section class="intro flex-column flex-center">
   <Marks />
 
-  <div class="intro__picker box bg-primary shadow-primary-darker">
+  <div class="intro__picker box flex-column bg-primary shadow-primary-darker">
     <h1 class="intro__heading clr-neutral fs-sm">Pick player 1's mark</h1>
     <MarkSelect {players} bind:group={selectedPlayer} />
     <p class="intro__hint clr-neutral">Remember X goes first</p>
@@ -43,18 +43,12 @@
 
 <style lang="scss">
   .intro {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     row-gap: 1.5em;
 
     &__picker {
-      display: flex;
-      flex-direction: column;
       width: 100%;
       padding: 1.5em;
     }
-
     &__hint {
       opacity: 0.5;
     }

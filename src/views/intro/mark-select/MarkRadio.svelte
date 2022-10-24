@@ -19,7 +19,7 @@
 
 <style lang="scss">
   .mark-radio {
-    flex-basis: 50%;
+    flex-basis: 100%;
     cursor: pointer;
     height: 100%;
     &:has(input[type="radio"]:checked) {

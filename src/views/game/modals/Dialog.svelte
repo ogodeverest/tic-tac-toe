@@ -13,7 +13,7 @@
 
 <dialog class="dialog bg-primary" bind:this={dialog}>
   {#if show}
-    <center in:fade>
+    <center in:fade class="flex-column flex-center">
       {#if $$slots.title}
         <header>
           <h1 class="fs-md clr-neutral">
@@ -24,7 +24,7 @@
       <section class="fs-lg">
         <slot name="content" />
       </section>
-      <footer class="dialog__footer">
+      <footer class="dialog__footer flex-row">
         <slot name="footer" />
       </footer>
     </center>
@@ -64,16 +64,11 @@
 
     & > center {
       display: flex;
-      flex-direction: column;
       gap: 2em;
-      justify-content: center;
-      align-items: center;
       height: 100%;
     }
 
     &__footer {
-      display: flex;
-      flex-direction: row;
       gap: 1em;
     }
   }

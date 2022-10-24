@@ -10,7 +10,7 @@
   }
 </script>
 
-<footer class="stats fs-sm">
+<footer class="stats main-grid fs-sm">
   <div class="stat box bg-cold">
     <p class="stat__key">
       X
@@ -36,9 +36,7 @@
 </footer>
 
 <style lang="scss">
-  @import "../../scss/mixins";
   .stats {
-    @include main-grid;
     .stat {
       flex-direction: column;
       padding: 0.5em 1em;

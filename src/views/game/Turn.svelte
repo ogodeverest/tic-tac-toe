@@ -10,7 +10,7 @@
 
 <style lang="scss">
   .turn {
-    grid-column: 2/3;
+    grid-column: 2/-2;
     padding-block: 0.5em;
     span {
       margin-left: 0.6em;
